@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: testapplication
+  namespace: openshift-gitops
+spec:
+  destination:
+    namespace: openshift-gitops
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: charts/controller-branch
+    repoURL: https://github.com/kborup-redhat/gitops.git
+    targetRevision: main
+    helm:
+      parameters: 
+      - name: environmentName
+        value: testapp123
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true    
+    syncOptions:
+    - CreateNamespace=true
