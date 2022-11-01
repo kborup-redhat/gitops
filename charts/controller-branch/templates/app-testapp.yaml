@@ -18,12 +18,12 @@ spec:
       selfHeal: true
     syncOptions:
     - CreateNamespace=true
-   ignoreDifferences:
-     - group: image.openshift.io
-       kind: ImageStream
-       jsonPointers:
-         - /spec
-     - group: apps.openshift.io
-       kind: DeploymentConfig
-       jsonPointers:
-         - /spec
+  ignoreDifferences:
+    - group: image.openshift.io
+      kind: ImageStream
+      jsonPointers:
+        - /spec
+    - group: apps.openshift.io
+      kind: DeploymentConfig
+      jsonPointers:
+        - /spec
