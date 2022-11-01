@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: "{{ .Values.environmentName }}"
+  namespace: openshift-gitops
+spec:
+  destination:
+    namespace: "{{ .Values.environmentName }}-skat"
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: funtest
+    repoURL: https://github.com/kborup-redhat/funtest.git
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
