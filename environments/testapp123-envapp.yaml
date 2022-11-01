@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: argocd-master
+  name: testapp123
   namespace: openshift-gitops
 spec:
   destination:
@@ -9,13 +9,17 @@ spec:
     server: https://kubernetes.default.svc
   project: default
   source:
-    path: environments
+    path: charts/ci
     repoURL: https://github.com/kborup-redhat/gitops.git
     targetRevision: main
+    helm:
+      parameters: 
+      - name: environmentName
+        value: testapp123
   syncPolicy:
     automated:
       prune: true
-      selfHeal: true
+      selfHeal: true    
     syncOptions:
     - CreateNamespace=true
 
