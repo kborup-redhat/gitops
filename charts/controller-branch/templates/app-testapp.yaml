@@ -4,8 +4,16 @@ metadata:
   name: "{{ .Values.environmentName }}-test"
   namespace: openshift-gitops
 spec:
+  sourceRepos:
+  - 'https://github.com/kborup-redhat/funtest.git'
+  destinations:
+  - namespace: '{{ .Values.environmentName }}-test'
+    server: 'https://kubernetes.default.svc'
+  clusterResourceWhitelist:
+  - group: '*'
+    kind: '*'
   destination:
-    namespace: "{{ .Values.environmentName }}"
+    namespace: "{{ .Values.environmentName }}-test"
     server: https://kubernetes.default.svc
   project: default
   source:
