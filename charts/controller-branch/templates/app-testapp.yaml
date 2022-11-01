@@ -19,9 +19,9 @@ spec:
     syncOptions:
     - CreateNamespace=true
   ignoreDifferences:
-     - group: '*'
-       name: httpd-example
-       kind: DeploymentConfig
-       namespace: "{{ .Values.environmentName }}-test"
-       jsonPointers:
-         - /spec/containers/image
+  - group: '*'
+    name: httpd-example
+    kind: DeploymentConfig
+    namespace: "{{ .Values.environmentName }}-test"
+    jsonPointers:
+    - /spec/containers/image
