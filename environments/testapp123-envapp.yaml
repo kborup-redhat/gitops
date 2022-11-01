@@ -9,7 +9,7 @@ spec:
     server: https://kubernetes.default.svc
   project: default
   source:
-    path: charts/ci
+    path: charts/controller-branch
     repoURL: https://github.com/kborup-redhat/gitops.git
     targetRevision: main
     helm:
