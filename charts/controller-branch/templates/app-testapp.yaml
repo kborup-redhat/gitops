@@ -4,9 +4,6 @@ metadata:
   name: "{{ .Values.environmentName }}-test"
   namespace: openshift-gitops
 spec:
-  clusterResourceBlacklist:
-   - group: 'core'
-     kind: 'namespace'
   destination:
     namespace: openshift-gitops 
     server: https://kubernetes.default.svc
