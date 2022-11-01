@@ -4,7 +4,7 @@ metadata:
   name: "{{ .Values.environmentName }}-test"
   namespace: openshift-gitops
 spec:
-  ClusterResourceBlacklist:
+  clusterResourceBlacklist:
    - group: 'core'
      kind: 'namespace'
   destination:
