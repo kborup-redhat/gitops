@@ -13,7 +13,7 @@ spec:
   - group: '*'
     kind: '*'
   destination:
-    namespace: "{{ .Values.environmentName }}-test"
+    namespace: openshift-gitops 
     server: https://kubernetes.default.svc
   project: default
   source:
@@ -24,5 +24,3 @@ spec:
     automated:
       prune: true
       selfHeal: true
-    syncOptions:
-    - CreateNamespace=true
