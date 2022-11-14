@@ -9,7 +9,6 @@ subjects:
   - kind: ServiceAccount
     name: argocd-{{ .Values.environmentName }}-argocd-application-controller
     namespace: {{ .Values.environmentName }}-argo
-  - kind: ServiceAccount 
   - kind: User
     apiGroup: rbac.authorization.k8s.io
     name: admin
