@@ -20,6 +20,8 @@ spec:
         value: testcustomer
       - name: dockerFile
         value: ".dockerconfigjson: ewogICAiYXV0aHMiOnsKICAgICAgImNsb3VkLm9wZW5zaGlmdC5jb20iOnsKICAgICAgICAgImF1dGgiOiJiM0JsYj0iLAogICAgICAgICAiZW1haWwiOiJ5b3VAZXhhbXBsZS5jb20iCiAgICAgIH0sCiAgICAgICJxdWF5LmlvIjp7CiAgICAgICAgICJhdXRoIjoiYjNCbGI9IiwKICAgICAgICAgImVtYWlsIjoieW91QGV4YW1wbGUuY29tIgogICAgICB9LAogICAgICAicXVheS5pby9yZXBvc2l0b3J5LW1haW4iOnsKICAgICAgICAgImF1dGgiOiJiM0JsYj0iLAogICAgICAgICAiZW1haWwiOiJ5b3VAZXhhbXBsZS5jb20iCiAgICAgIH0KICAgfQp9Cg==" 
+      - name: groupNameAdmin
+        value: gruppenavn1
   syncPolicy:
     automated:
       prune: true
