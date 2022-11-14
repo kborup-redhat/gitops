@@ -1,0 +1,19 @@
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: admin-{{ .Values.environmentName}}-test
+  namespace: {{ .Values.environmentName }}-test
+  labels:
+    platform/owner: {{ .Values.customerName }}
+subjects:
+  - kind: ServiceAccount
+    name: argocd-{{ .Values.environmentName }}-argocd-application-controller
+    namespace: {{ .Values.environmentName }}-argo
+  - kind: ServiceAccount 
+  - kind: User
+    apiGroup: rbac.authorization.k8s.io
+    name: admin
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: admin
