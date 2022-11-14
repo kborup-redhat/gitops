@@ -5,7 +5,7 @@ metadata:
   namespace: {{ .Values.environmentName }}-dev
   labels:
     kubernetes.io/metadata.name: {{ .Values.environmentName }}-dev
-    platform/owner: {{ .Values.customerName }
+    platform/owner: {{ .Values.customerName }}
 subjects:
   - kind: Group
     apiGroup: rbac.authorization.k8s.io

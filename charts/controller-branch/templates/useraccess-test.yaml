@@ -5,7 +5,7 @@ metadata:
   namespace: {{ .Values.environmentName }}-test
   labels:
     kubernetes.io/metadata.name: {{ .Values.environmentName }}-test
-    platform/owner: {{ .Values.customerName }
+    platform/owner: {{ .Values.customerName }}
 subjects:
   - kind: Group
     apiGroup: rbac.authorization.k8s.io
