@@ -7,7 +7,7 @@ spec:
   destination:
     namespace: openshift-gitops
     server: https://kubernetes.default.svc
-  project: default
+  project: testapp
   source:
     path: charts/controller-branch
     repoURL: https://github.com/kborup-redhat/gitops.git
