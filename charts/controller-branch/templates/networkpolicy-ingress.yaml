@@ -1,0 +1,19 @@
+{{- range $.Values.namespacePostfixes }}
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-from-openshift-ingress
+  namespace: {{ $.Values.environmentName }}-{{ . }} 
+  labels:
+    platform/owner: {{ $.Values.customerName }}
+spec:
+  ingress:
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          policy-group.network.openshift.io/ingress: ""
+  podSelector: {}
+  policyTypes:
+  - Ingress
+{{- end }}
