@@ -37,6 +37,7 @@ spec:
     defaultPolicy: ''
     policy: |
       g, system:cluster-admins, role:admin
+      g, system:{{ $.Values.environmentName }}-argo role:readonly
     scopes: '[groups]'
   repo:
     resources:
