@@ -22,7 +22,6 @@ spec:
           - dev
           - test
           - prod
-          - argo
   syncPolicy:
     automated:
       prune: true
