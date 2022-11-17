@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: "{{ .Values.environmentName }}-{{ .Values.applicationName}}"
+  name: "{{ .Values.environmentName }}-{{ .Values.applicationName }}"
   namespace: openshift-gitops
 spec:
   destination:
