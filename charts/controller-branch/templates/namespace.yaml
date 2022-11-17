@@ -1,0 +1,10 @@
+{{- range $.Values.namespacePostfixes }}
+kind: Namespace
+apiVersion: v1
+metadata:
+  annotations:
+  labels:
+    kubernetes.io/metadata.name: {{ .Values.environmentName }}-{{ . }}
+    platform/owner: {{ .Values.customerName }}
+  name: {{ .Values.environmentName }}-{{ . }}
+{{- end }}

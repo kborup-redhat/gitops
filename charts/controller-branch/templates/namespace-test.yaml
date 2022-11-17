@@ -1,8 +1,0 @@
-apiVersion: v1
-kind: Namespace
-metadata:
-  annotations:
-  labels:
-    kubernetes.io/metadata.name: {{ .Values.environmentName }}-test 
-    platform/owner: {{ .Values.customerName }}
-  name: {{ .Values.environmentName }}-test
