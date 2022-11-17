@@ -4,8 +4,11 @@ kind: Namespace
 apiVersion: v1
 metadata:
   annotations:
+    argocd.argoproj.io/sync-wave: "-1"
   labels:
     kubernetes.io/metadata.name: {{ $.Values.environmentName }}-{{ . }}
     platform/owner: {{ $.Values.customerName }}
+    argocd.argoproj.io/managed-by: openshift-gitops
   name: {{ $.Values.environmentName }}-{{ . }}
 {{- end }}
+
