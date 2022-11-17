@@ -3,7 +3,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: "{{ .Values.environmentName }}-funtest"
-  namespace: {{ .Values.environmentName }}-argo
+  namespace: openshift-gitops
 spec:
   destination:
     namespace: "{{ .Values.environmentName }}-dev"
