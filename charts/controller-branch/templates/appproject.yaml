@@ -5,9 +5,16 @@ metadata:
   name: {{ .Values.environmentName }}-project
   namespace: openshift-gitops
 spec:
-  clusterResourceWhitelist:
-    - group: '*'
-      kind: '*'
+  namespaceResourceBlacklist:
+  - group: '*'
+    kind: ResourceQuota
+  - group: '*'
+    kind: LimitRange
+  - group: '*'
+    kind: NetworkPolicy
+  - group: '*'
+    kind: StatefulSet
+  - 
   destinations:
     - name: {{ .Values.environmentName }}-dev
       namespace: {{ .Values.environmentName }}-dev
@@ -18,8 +25,5 @@ spec:
     - name: {{ .Values.environmentName }}-prod
       namespace: {{ .Values.environmentName }}-prod
       server: 'https://kubernetes.default.svc'
-      #    - name: openshift-gitops
-      # namespace: openshift-gitops
-      # server: 'https://kubernetes.default.svc'
   sourceRepos:
      - {{ .Values.gitrepoName }} 
