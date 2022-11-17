@@ -22,7 +22,9 @@ spec:
           - dev
           - test
           - prod
-          - argo
+        applicationName: funtest
+        gitrepoName: https://github.com/kborup-redhat/funtest.git
+        gitrepoPath: funtest 
   syncPolicy:
     automated:
       prune: true
