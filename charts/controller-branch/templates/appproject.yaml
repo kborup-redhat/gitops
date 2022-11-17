@@ -1,0 +1,25 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: {{ .Values.environmentName }}-project
+  namespace: openshift-gitops
+spec:
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
+  destinations:
+    - name: {{ .Values.environmentName }}-dev
+      namespace: {{ .Values.environmentName }}-dev
+      server: 'https://kubernetes.default.svc'
+    - name: {{ .Values.environmentName }}-test
+      namespace: {{ .Values.environmentName }}-test
+      server: 'https://kubernetes.default.svc'
+    - name: {{ .Values.environmentName }}-prod
+      namespace: {{ .Values.environmentName }}-prod
+      server: 'https://kubernetes.default.svc'
+    - name: openshift-gitops
+      namespace: openshift-gitops
+      server: 'https://kubernetes.default.svc'
+  sourceRepos:
+     - {{ .Values.gitrepoName }} 
