@@ -6,7 +6,7 @@ metadata:
   namespace: {{ .Values.environmentName }}-argo
 spec:
   destination:
-    namespace: "{{ .Values.environmentName }}-argo"
+    namespace: "{{ .Values.environmentName }}-dev"
     server: https://kubernetes.default.svc
   project: default
   source:
