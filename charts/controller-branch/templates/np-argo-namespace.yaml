@@ -6,7 +6,7 @@ metadata:
   labels:
     platform/owner: {{ .Values.customerName }}
 spec:
-  podSelector:
+  podSelector: {}
   ingress:
   - from:
     - podSelector: {}
