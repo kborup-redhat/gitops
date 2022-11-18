@@ -10,8 +10,8 @@ spec:
   ignoreDifferences:
   - group: "apps"
     kind: "DeploymentConfig"
-    jsonPointers:
-    - /spec/containers[*]/image
+    jqPathExpressions:
+    - .spec.containers[] | select(.name == "image")
   destination:
     namespace: "{{ .Values.environmentName }}-dev"
     server: https://kubernetes.default.svc
