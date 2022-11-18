@@ -8,10 +8,10 @@ metadata:
   namespace: openshift-gitops
 spec:
   ignoreDifferences:
-  - group: apps.openshift.io/v1
+  - group: apps.openshift.io
     kind: DeploymentConfig
     jsonPointers:
-    - 'spec.template.spec.containers[]?.image'
+    - /spec/template/spec/containers/0/image
     namespace: "{{ .Values.environmentName }}-dev"
   destination:
     namespace: "{{ .Values.environmentName }}-dev"
