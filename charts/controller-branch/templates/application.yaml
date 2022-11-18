@@ -8,8 +8,8 @@ metadata:
   namespace: openshift-gitops
 spec:
   ignoreDifferences:
-  - group: "apps"
-    kind: "DeploymentConfig"
+  - group: apps
+    kind: DeploymentConfig
     jsonPointers:
     - .spec.template.spec.containers[] | select(.name == "image")
   destination:
