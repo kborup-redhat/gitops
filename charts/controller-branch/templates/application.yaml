@@ -11,7 +11,7 @@ spec:
   - group: apps
     kind: DeploymentConfig
     jsonPointers:
-    - .spec.template.spec.containers[] 
+    - .spec.template.spec.containers[].image 
     namespace: "{{ .Values.environmentName }}-dev"
   destination:
     namespace: "{{ .Values.environmentName }}-dev"
