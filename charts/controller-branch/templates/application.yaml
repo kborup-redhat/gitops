@@ -8,7 +8,7 @@ metadata:
   namespace: openshift-gitops
 spec:
   ignoreDifferences:
-  - group: "*"
+  - group: "apps"
     kind: "DeploymentConfig"
     jsonPointers:
     - /spec/containers/image
