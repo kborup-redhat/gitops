@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
-  name: {{ .Values.environmentName }}-project
+  name: {{ .Values.environmentName }}
   namespace: openshift-gitops
 spec:
   namespaceResourceBlacklist:
@@ -15,14 +15,8 @@ spec:
   - group: '*'
     kind: StatefulSet
   destinations:
-    - name: {{ .Values.environmentName }}-dev
-      namespace: {{ .Values.environmentName }}-dev
-      server: 'https://kubernetes.default.svc'
-    - name: {{ .Values.environmentName }}-test
-      namespace: {{ .Values.environmentName }}-test
-      server: 'https://kubernetes.default.svc'
-    - name: {{ .Values.environmentName }}-prod
-      namespace: {{ .Values.environmentName }}-prod
+    - name: {{ .Values.environmentName }}
+      namespace: {{ .Values.environmentName }}
       server: 'https://kubernetes.default.svc'
   sourceRepos:
      - {{ .Values.gitrepoName }} 

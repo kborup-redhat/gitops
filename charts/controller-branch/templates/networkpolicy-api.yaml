@@ -1,12 +1,11 @@
-{{- range $.Values.namespacePostfixes }}
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
   name: allow-from-kube-apiserver-operator
-  namespace: {{ $.Values.environmentName }}-{{ . }}
+  namespace: {{ $.Values.nameSpace }}
   labels:
-    platform/owner: {{ $.Values.customerName }}
+    platform/owner: {{ $.Values.nameSpace }}
 spec:
   ingress:
   - from:
@@ -19,4 +18,3 @@ spec:
   podSelector: {}
   policyTypes:
   - Ingress
-{{- end }}

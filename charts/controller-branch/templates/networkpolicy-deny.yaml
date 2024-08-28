@@ -1,14 +1,12 @@
-{{- range $.Values.namespacePostfixes }}
 ---
 kind: NetworkPolicy
 apiVersion: networking.k8s.io/v1
 metadata:
   name: deny-by-default
-  namespace: {{ $.Values.environmentName }}-{{ . }}
+  namespace: {{ $.Values.nameSpace }}
   labels:
-    platform/owner: {{ $.Values.customerName }}
+    platform/owner: {{ $.Values.nameSpace }}
 spec:
   podSelector: {}
   ingress: []
-{{- end }}
 

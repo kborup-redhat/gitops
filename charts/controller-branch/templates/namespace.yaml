@@ -1,4 +1,3 @@
-{{- range $.Values.namespacePostfixes }}
 ---
 kind: Namespace
 apiVersion: v1
@@ -6,9 +5,7 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "-1"
   labels:
-    kubernetes.io/metadata.name: {{ $.Values.environmentName }}-{{ . }}
-    platform/owner: {{ $.Values.customerName }}
+    kubernetes.io/metadata.name: {{ $.Values.nameSpace }}
     argocd.argoproj.io/managed-by: openshift-gitops
-  name: {{ $.Values.environmentName }}-{{ . }}
-{{- end }}
+  name: {{ $.Values.nameSpace }}
 
