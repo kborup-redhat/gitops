@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: testapplication
+  name: namespace
   namespace: openshift-gitops
 spec:
   destination:
@@ -14,17 +14,7 @@ spec:
     targetRevision: main
     helm:
       values: |- 
-        machineName: testmachine1
-        description: "This is a virtual machine"
         nameSpace: machines
-        storageSize: 30Gi
-        datadiskSize: 30Gi
-        secretKeyName: n-key
-        cores: 2
-        sockets: 1
-        threads: 1
-        storageClassName: ocs-storagecluster-ceph-rbd
-        gitrepoName: https://github.com/kborup-redhat/virt-gitops.git
   syncPolicy:
     automated:
       prune: true

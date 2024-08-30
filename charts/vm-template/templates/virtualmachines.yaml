@@ -1,0 +1,129 @@
+apiVersion: kubevirt.io/v1
+kind: VirtualMachine
+metadata:
+  annotations:
+    description: |
+      {{ .Values.description }}
+    vm.kubevirt.io/validations: |
+      [
+        {
+          "name": "minimal-required-memory",
+          "path": "jsonpath::.spec.domain.memory.guest",
+          "rule": "integer",
+          "message": "This VM requires more memory.",
+          "min": 1610612736
+        }
+      ]
+  labels:
+    argo: managed
+    app: rhel9-template
+    kubevirt.io/dynamic-credentials-support: 'true'
+    vm.kubevirt.io/template: rhel9-server-small
+    vm.kubevirt.io/template.namespace: openshift
+    vm.kubevirt.io/template.revision: '1'
+    vm.kubevirt.io/template.version: v0.26.0
+  managedFields:
+  name: {{ .Values.machineName }}
+  namespace: {{ .Values.nameSpace }}
+spec:
+  dataVolumeTemplates:
+    - apiVersion: cdi.kubevirt.io/v1beta1
+      kind: DataVolume
+      metadata:
+        creationTimestamp: null
+        name: {{ .Values.machineName }}
+      spec:
+        sourceRef:
+          kind: DataSource
+          name: rhel9
+          namespace: openshift-virtualization-os-images
+        storage:
+          resources:
+            requests:
+              storage: {{ .Values.storageSize }}
+{{ if .Values.datadiskSize }}
+    - metadata:
+        creationTimestamp: null
+        name: {{ .Values.machineName }}-datadisk
+      spec:
+        preallocation: false
+        source:
+          blank: {}
+        storage:
+          resources:
+            requests:
+              storage: {{ .Values.datadiskSize }}
+          storageClassName: {{ .Values.storageClassName }}
+{{ else }}
+{{ end }}
+  running: true
+  template:
+    metadata:
+      annotations:
+        vm.kubevirt.io/flavor: small
+        vm.kubevirt.io/os: rhel9
+        vm.kubevirt.io/workload: server
+      creationTimestamp: null
+      labels:
+        kubevirt.io/domain: {{ .Values.machineName }}
+        kubevirt.io/size: small
+    spec:
+      architecture: amd64
+      domain:
+        cpu:
+          cores: {{ .Values.cores }}
+          sockets: {{ .Values.sockets }}
+          threads: {{ .Values.threads }}
+        devices:
+          disks:
+            - disk:
+                bus: virtio
+              name: rootdisk
+            - disk:
+                bus: virtio
+              name: cloudinitdisk
+{{ if .Values.datadiskSize }}
+            - disk:
+                bus: virtio
+              name: datadisk
+{{ else }}
+{{ end }}
+          interfaces:
+            - masquerade: {}
+              model: virtio
+              name: default
+          networkInterfaceMultiqueue: true
+          rng: {}
+        features:
+          acpi: {}
+          smm:
+            enabled: true
+        firmware:
+          bootloader:
+            efi: {}
+        machine:
+          type: pc-q35-rhel9.2.0
+        memory:
+          guest: 4Gi
+        resources: {}
+      networks:
+        - name: default
+          pod: {}
+      terminationGracePeriodSeconds: 180
+      volumes:
+        - dataVolume:
+            name: {{ .Values.machineName }}
+          name: rootdisk
+        - cloudInitConfigDrive:
+            userData: |-
+              #cloud-config
+              user: cloud-user
+              password: changeme
+              chpasswd: { expire: False }
+          name: cloudinitdisk
+{{ if .Values.datadiskSize }}
+        - dataVolume:
+            name: {{ .Values.machineName }}-datadisk
+          name: datadisk
+{{ else }}
+{{ end }}

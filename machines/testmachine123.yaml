@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: testapplication
+  namespace: openshift-gitops
+spec:
+  destination:
+    namespace: openshift-gitops
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: charts/vm-templates
+    repoURL: https://github.com/kborup-redhat/gitops.git
+    targetRevision: main
+    helm:
+      values: |- 
+        machineName: testmachine1
+        description: "This is a virtual machine"
+        nameSpace: machines
+        storageSize: 30Gi
+        datadiskSize: 30Gi
+        cores: 2
+        sockets: 1
+        threads: 1
+        storageClassName: ocs-storagecluster-ceph-rbd
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
